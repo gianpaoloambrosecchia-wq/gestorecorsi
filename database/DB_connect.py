@@ -28,9 +28,11 @@ class DBConnect:
                 )
                 return cls._cnxpool.get_connection()
             except mysql.connector.Error as err:
+                #Errore password
                 if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                     print("Something is wrong with your user name or password")
                     return None
+                #Errore nell'importazione del database
                 elif err.errno == errorcode.ER_BAD_DB_ERROR:
                     print("Database does not exist")
                     return None
